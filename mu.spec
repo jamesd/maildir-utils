@@ -3,17 +3,18 @@
 %global checkout 20150601git%{shortcommit}
 Name:		mu
 Version:	0.9.12
-Release:	1.%{checkout}%{?dist}
+Release:	2.%{checkout}%{?dist}
 Summary:	mu is a tool for e-mail messages stored in the Maildir-format
-
+Group:		Applications/Internet
 License:	GPLv3
 URL:		http://www.djcbsoftware.nl/code/mu/
 Source0:	https://github.com/djcb/%{name}/archive/%{commit}/%{name}-%{commit}.tar.gz
 
 BuildRequires:	autoconf, automake, libtool, texinfo, gmime-devel, xapian-core-devel
+Requires:	gmime, xapian-core-libs
 
 %description
-mu is a tool for dealing with e-mail messages stored in the
+A tool for dealing with e-mail messages stored in the
 Maildir-format. mu’s purpose in life is to help you to quickly find
 the messages you need; in addition, it allows you to view messages,
 extract attachments, create new maildirs, and so on.
@@ -80,5 +81,8 @@ fi
 
 
 %changelog
+* Fri Jul 17 2015 James Davidson <james@greycastle.net> - 0.9.12-2.20150601git3804c0d
+- Update mu package requires and description
+
 * Wed Jul  1 2015 James Davidson <james@greycastle.net> - 0.9.12-1.20150601git3804c0d
 - Initial packaging

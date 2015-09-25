@@ -1,14 +1,11 @@
-%global commit 3804c0d0c082cc3a69cda7f856533f45fc65f812
-%global shortcommit %(c=%{commit}; echo ${c:0:7})
-%global checkout 20150601git%{shortcommit}
 Name:		mu
-Version:	0.9.12
-Release:	2.%{checkout}%{?dist}
+Version:	0.9.13
+Release:	1%{?dist}
 Summary:	mu is a tool for e-mail messages stored in the Maildir-format
 Group:		Applications/Internet
 License:	GPLv3
 URL:		http://www.djcbsoftware.nl/code/mu/
-Source0:	https://github.com/djcb/%{name}/archive/%{commit}/%{name}-%{commit}.tar.gz
+Source0:	https://github.com/djcb/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
 
 BuildRequires:	autoconf, automake, libtool, texinfo, gmime-devel, xapian-core-devel
 Requires:	gmime, xapian-core-libs
@@ -40,7 +37,7 @@ Requires:	emacs-mu4e = %{version}-%{release}
 
 
 %prep
-%setup -qn %{name}-%{commit}
+%setup -qn %{name}-%{version}
 
 
 %build
@@ -81,6 +78,9 @@ fi
 
 
 %changelog
+* Fri Sep 25 2015 James Davidson <james@greycastle.net> - 0.9.13-1
+- Update to 0.9.13
+
 * Fri Jul 17 2015 James Davidson <james@greycastle.net> - 0.9.12-2.20150601git3804c0d
 - Update mu package requires and description
 

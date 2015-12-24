@@ -1,6 +1,6 @@
 Name:		mu
 Version:	0.9.15
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	mu is a tool for e-mail messages stored in the Maildir-format
 Group:		Applications/Internet
 License:	GPLv3
@@ -70,6 +70,7 @@ fi
 
 
 %files -n emacs-mu4e
+%doc %{_docdir}/mu/mu4e-about.org
 %{_emacs_sitelispdir}/mu4e/*.elc
 %{_infodir}/mu4e.info*
 
@@ -78,6 +79,9 @@ fi
 
 
 %changelog
+* Wed Dec  2 2015 James Davidson <james@greycastle.net> - 0.9.15-2
+- Update emacs-mu4e packaging
+
 * Fri Nov 13 2015 James Davidson <james@greycastle.net> - 0.9.15-1
 - Update to 0.9.15
 

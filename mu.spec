@@ -1,11 +1,11 @@
 Name:		mu
-Version:	0.9.15
-Release:	2%{?dist}
+Version:	0.9.16
+Release:	1%{?dist}
 Summary:	mu is a tool for e-mail messages stored in the Maildir-format
 Group:		Applications/Internet
 License:	GPLv3
 URL:		http://www.djcbsoftware.nl/code/mu/
-Source0:	https://github.com/djcb/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
+Source0:	https://github.com/djcb/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
 
 BuildRequires:	autoconf, automake, libtool, texinfo, gmime-devel, xapian-core-devel
 Requires:	gmime, xapian-core-libs
@@ -79,6 +79,9 @@ fi
 
 
 %changelog
+* Wed Feb 10 2016 James Davidson <james@greycastle.net> - 0.9.16-1
+- Update to 0.9.16
+
 * Wed Dec  2 2015 James Davidson <james@greycastle.net> - 0.9.15-2
 - Update emacs-mu4e packaging
 

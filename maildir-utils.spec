@@ -47,7 +47,7 @@ Requires:	emacs-mu4e = %{version}-%{release}
 %build
 autoreconf -i
 %configure --enable-mu4e
-make %{?_smp_mflags}
+%make_build
 
 
 %install

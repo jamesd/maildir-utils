@@ -1,15 +1,11 @@
-%global commit 52b7aae43915eeb5858389fa783c00b09a16d49b
-%global shortcommit %(c=%{commit}; echo ${c:0:7})
-%global checkout 20160611git%{shortcommit}
-
 Name:		maildir-utils
-Version:	0.9.16
-Release:	2.%{checkout}%{?dist}
+Version:	0.9.17
+Release:	1%{?dist}
 Summary:	mu is a tool for e-mail messages stored in the Maildir-format
 Group:		Applications/Internet
 License:	GPLv3
 URL:		http://www.djcbsoftware.nl/code/mu/
-Source0:	https://github.com/djcb/mu/archive/%{commit}/mu-%{commit}.tar.gz
+Source0:	https://github.com/djcb/mu/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
 BuildRequires:	autoconf, automake, libtool, texinfo, gmime-devel, xapian-core-devel
 Requires:	gmime, xapian-core-libs
@@ -41,7 +37,7 @@ Requires:	emacs-mu4e = %{version}-%{release}
 
 
 %prep
-%setup -qn mu-%{commit}
+%setup -qn mu-%{version}
 
 
 %build
@@ -83,6 +79,9 @@ fi
 
 
 %changelog
+* Sat Nov 12 2016 James Davidson <james@greycastle.net> - 0.9.17-1.
+- Update to 0.9.17
+
 * Sat Jun 25 2016 James Davidson <james@greycastle.net> - 0.9.16-2.20160611git52b7aae4
 - Change package name to maildir-utils to avoid conflict
 - Update to upstream commit 52b7aae4

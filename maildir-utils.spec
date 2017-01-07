@@ -1,5 +1,5 @@
 Name:		maildir-utils
-Version:	0.9.17
+Version:	0.9.18
 Release:	1%{?dist}
 Summary:	mu is a tool for e-mail messages stored in the Maildir-format
 Group:		Applications/Internet
@@ -79,6 +79,9 @@ fi
 
 
 %changelog
+* Sat Jan  7 2017 James Davidson <james@greycastle.net> - 0.9.18-1
+- Update to 0.9.18
+
 * Sat Nov 12 2016 James Davidson <james@greycastle.net> - 0.9.17-1.
 - Update to 0.9.17
 

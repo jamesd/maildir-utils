@@ -9,9 +9,12 @@
 %global commit %{version}
 %endif
 
+# maildir-utils-toys requires webkitgtk3 which f27 does not have
+%{?fc27:%global _disable_webkit --disable-webkit}
+
 Name:		maildir-utils
 Version:	0.9.18
-Release:	2%{?checkout}%{?dist}
+Release:	3%{?checkout}%{?dist}
 Summary:	mu is a tool for e-mail messages stored in the Maildir-format
 License:	GPLv3+
 URL:		http://www.djcbsoftware.nl/code/mu/
@@ -25,9 +28,10 @@ BuildRequires:	texinfo
 BuildRequires:	gmime-devel
 BuildRequires:	xapian-core-devel
 BuildRequires:	gtk3-devel
-BuildRequires:	webkitgtk3-devel
+%{!?_disable_webkit:BuildRequires: webkitgtk3-devel}
 Requires:	gmime
 Requires:	xapian-core-libs
+%{?f27:Obsoletes: maildir-utils-toys < 0.9.18-3.20170922gitcb0025b3}
 
 %description
 A tool for dealing with e-mail messages stored in the
@@ -35,6 +39,7 @@ Maildir-format. mu’s purpose in life is to help you to quickly find
 the messages you need; in addition, it allows you to view messages,
 extract attachments, create new maildirs, and so on.
 
+%if 0%{!?_disable_webkit:1}
 %package -n maildir-utils-toys
 Summary:	mu additional toys
 Requires:	%{name} = %{version}-%{release}
@@ -43,6 +48,7 @@ Requires:	webkitgtk3
 
 %description -n maildir-utils-toys
 %{summary}
+%endif
 
 %package -n emacs-mu4e
 Summary:	mu4e e-mail reader for GNU Emacs
@@ -69,14 +75,16 @@ Requires:	emacs-mu4e = %{version}-%{release}
 
 %build
 autoreconf -i
-%configure --enable-mu4e
+%configure --enable-mu4e %{?_disable_webkit}
 %make_build
 
 
 %install
 %make_install
+%if 0%{!?_disable_webkit:1}
 %{__install} -p -m 755 toys/mug/mug %{buildroot}%{_bindir}
 %{__install} -p -m 755 toys/msg2pdf/msg2pdf %{buildroot}%{_bindir}
+%endif
 # Remove empty useless directory
 rm -f %{buildroot}/%{_infodir}/dir
 
@@ -97,9 +105,11 @@ fi
 %{_bindir}/mu
 %{_mandir}/man*/*
 
+%if 0%{!?_disable_webkit:1}
 %files -n maildir-utils-toys
 %{_bindir}/mug
 %{_bindir}/msg2pdf
+%endif
 
 %files -n emacs-mu4e
 %doc %{_docdir}/mu/mu4e-about.org
@@ -111,6 +121,9 @@ fi
 
 
 %changelog
+* Fri Nov 24 2017 James Davidson <james@greycastle.net> - 0.9.18-3.20170922gitcb0025b3
+- Don't build maildir-utils-toys package in f27
+
 * Fri Sep 22 2017 James Davidson <james@greycastle.net> - 0.9.18-2.20170922gitcb0025b3
 - Update to upstream commit cb0025b3
 - Fix licence to GPLv3+

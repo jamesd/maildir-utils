@@ -2,7 +2,8 @@
 
 # For a snapshot based on a commit, just specify the commit id
 # and update the date in checkout below
-%global commit cb0025b352765e84c4de3a136d4e143ca07cd198
+# N.B., remove the % in front of global
+#global commit cb0025b352765e84c4de3a136d4e143ca07cd198
 %if "%{?commit}" != ""
 %global checkout .20170922git%(c=%{commit}; echo ${c:0:8})
 %else
@@ -13,12 +14,12 @@
 %{?fc27:%global _disable_webkit --disable-webkit}
 
 Name:		maildir-utils
-Version:	0.9.18
-Release:	3%{?checkout}%{?dist}
+Version:	1.0
+Release:	1%{?checkout}%{?dist}
 Summary:	mu is a tool for e-mail messages stored in the Maildir-format
 License:	GPLv3+
 URL:		http://www.djcbsoftware.nl/code/mu/
-Source0:	https://github.com/djcb/%{repo}/archive/%{commit}.tar.gz#/%{name}-%{commit}.tar.gz
+Source0:	https://github.com/djcb/%{repo}/archive/v%{commit}.tar.gz#/%{name}-%{commit}.tar.gz
 
 BuildRequires:	autoconf
 BuildRequires:	autoconf-archive >= 2015.09.25
@@ -121,6 +122,9 @@ fi
 
 
 %changelog
+* Sun Feb  4 2018 James Davidson <james@greycastle.net> - 1.0-1
+- Update to 1.0
+
 * Fri Nov 24 2017 James Davidson <james@greycastle.net> - 0.9.18-3.20170922gitcb0025b3
 - Don't build maildir-utils-toys package in f27
 

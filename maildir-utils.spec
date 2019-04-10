@@ -10,26 +10,27 @@
 %global commit %{version}
 %endif
 
-# maildir-utils-toys requires webkitgtk3 which f27 does not have
-%{?fc27:%global _disable_webkit --disable-webkit}
+%global _hardened_build 1
+
+# maildir-utils-toys requires pkgconfig(webkitgtk-3.0) which f27-f29 does not have
+%global _disable_webkit --disable-webkit
 
 Name:		maildir-utils
-Version:	1.0
+Version:	1.2
 Release:	1%{?checkout}%{?dist}
 Summary:	mu is a tool for e-mail messages stored in the Maildir-format
 License:	GPLv3+
 URL:		http://www.djcbsoftware.nl/code/mu/
-Source0:	https://github.com/djcb/%{repo}/archive/v%{commit}.tar.gz#/%{name}-%{commit}.tar.gz
+Source0:	https://github.com/djcb/%{repo}/archive/%{commit}.tar.gz#/%{name}-%{commit}.tar.gz
 
 BuildRequires:	autoconf
 BuildRequires:	autoconf-archive >= 2015.09.25
 BuildRequires:	automake
+BuildRequires:	gcc-c++
 BuildRequires:	libtool
 BuildRequires:	texinfo
-BuildRequires:	gmime-devel
-BuildRequires:	xapian-core-devel
-BuildRequires:	gtk3-devel
-%{!?_disable_webkit:BuildRequires: webkitgtk3-devel}
+BuildRequires:	pkgconfig(gmime-3.0)
+BuildRequires:	pkgconfig(xapian-core)
 Requires:	gmime
 Requires:	xapian-core-libs
 %{?f27:Obsoletes: maildir-utils-toys < 0.9.18-3.20170922gitcb0025b3}
@@ -43,6 +44,8 @@ extract attachments, create new maildirs, and so on.
 %if 0%{!?_disable_webkit:1}
 %package -n maildir-utils-toys
 Summary:	mu additional toys
+BuildRequires:	pkgconfig(gtk+-3.0)
+BuildRequires:	pkgconfig(webkitgtk-3.0)
 Requires:	%{name} = %{version}-%{release}
 Requires:	gtk3
 Requires:	webkitgtk3
@@ -122,6 +125,9 @@ fi
 
 
 %changelog
+* Wed Apr 10 2019 James Davidson <james@greycastle.net> - 1.2-1
+- Update to 1.2
+
 * Sun Feb  4 2018 James Davidson <james@greycastle.net> - 1.0-1
 - Update to 1.0
 
